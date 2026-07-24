@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s301-bayes"
+version = "1.0.0"
+description = "Reproduction code for the statistical analysis of 'Is S301 the Captured Companion of the Hypervelocity Star S5-HVS1?'"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Andrea Caputo" },
+  { name = "Giovanni Maria Tomaselli" },
+]
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

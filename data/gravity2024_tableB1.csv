@@ -1,0 +1,12 @@
+# Updated orbital elements for the four stars re-fitted by the GRAVITY Collaboration.
+# Source: GRAVITY Collaboration (Abd El Dayem et al.) 2024, A&A 692, A242
+# (arXiv:2409.12261), Table B.1 ("Best-fit parameters of the four-star fit
+# determining fSP"). Semi-major axes are angular (arcsec); that fit has
+# R0 = 8275.9 pc, so 1 arcsec = 8275.9 AU (conversion applied in code, not here).
+# These entries override the Gillessen et al. (2017) values for the same stars.
+# Columns: star, a_arcsec, a_err_arcsec, e, e_err
+star,a_arcsec,a_err_arcsec,e,e_err
+S2,0.12502,0.00003,0.88444,0.00006
+S29,0.39025,0.00094,0.96880,0.00009
+S38,0.14249,0.00004,0.81807,0.00022
+S55,0.10424,0.00005,0.72980,0.00018
