@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Compute every Bayes factor of the paper's statistical analysis.
+"""Full per-star output of the orbit-only analysis.
+
+For the fiducial density slope gamma = 1.1 and for gamma = 1.75, prints every
+catalog star's semi-major axis, eccentricity, survival probability and Bayes
+factor B_i, the catalog-level coefficient of B_cat = 1 + coeff * p_det, and the
+Bayes factor of S301's mirrored orbital solution. The paper's table (fiducial
+model and robustness checks) is produced by scripts/robustness.py.
 
 Deterministic (Fokker-Planck based): repeated runs give identical numbers.
-Runtime: a couple of minutes on a laptop.
+Runtime: about 10 s on a laptop.
 
 Usage:  python scripts/run_analysis.py
 """
@@ -15,13 +21,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from s301_bayes import constants as c
 from s301_bayes.bayes import compute_catalog
+from s301_bayes.catalog import load_s301
 from s301_bayes.likelihoods import PairLikelihood
 
 HEADLINE = ["S301", "S14", "S29", "S175"]
 
 
 def main():
-    print("S301 / S5-HVS1 catalog-level Bayes-factor analysis")
+    print("S301 / S5-HVS1 catalog-level Bayes-factor analysis (orbit only)")
     print(f"  line coefficient : {c.LINE_COEFF_AU:.2f} AU/Msun")
     print(
         f"  a support        : [{c.A_SUPPORT[0]:.1f}, {c.A_SUPPORT[1]:.1f}] AU"
@@ -29,12 +36,15 @@ def main():
     )
     print(f"  absorbing radius : {c.R_ABSORB_AU} AU (pericenter)")
 
+    label = {g: "robustness check" for g in c.GAMMAS}
+    label[c.GAMMA_FIDUCIAL] = "fiducial"
+    e_mirror = load_s301("mirror").e
     tables = {}
     for gamma in c.GAMMAS:
         t0 = time.time()
         pair = PairLikelihood(gamma)
         tables[gamma] = compute_catalog(gamma, pair=pair)
-        print(f"\ngamma = {gamma}  (computed in {time.time() - t0:.0f} s)")
+        print(f"\ngamma = {gamma}, {label[gamma]}  (computed in {time.time() - t0:.0f} s)")
         print(f"  {'star':<6}{'a [AU]':>9}{'e':>9}{'P_surv':>9}{'B_i':>12}  source")
         for r in tables[gamma].results:
             s = r.star
@@ -46,12 +56,12 @@ def main():
         n = tables[gamma].n_stars
         print(f"  N = {n} stars;  B_cat = 1 + {tables[gamma].bcat_coeff:.3g} * p_det")
         print(
-            f"  S301 mirrored solution (e = 0.9824): "
+            f"  S301 mirrored solution (e = {e_mirror:.4f}): "
             f"B_301 = {tables[gamma].mirror_b301:.4g}"
         )
 
     print("\n" + "=" * 58)
-    print("Paper table (Bayes factors):")
+    print("Summary, orbit only (the paper's table: scripts/robustness.py):")
     print(f"  {'':<12}" + "".join(f"gamma = {g:<8}" for g in c.GAMMAS))
     for name in HEADLINE:
         row = f"  B_{name[1:]:<10}"

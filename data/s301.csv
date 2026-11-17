@@ -1,8 +1,11 @@
 # Orbital elements of S301.
-# Source: GRAVITY Collaboration (Abd El Dayem et al.) 2026, arXiv:2607.12664,
-# as quoted in the paper. Semi-major axis is physical (AU). The orbit admits a
-# second, mirrored-orientation solution with a slightly different eccentricity;
-# the "primary" solution is used in the headline numbers.
+# Source: GRAVITY Collaboration (Abd El Dayem et al.) 2026, arXiv:2607.12664.
+# That paper gives the angular semi-major axis, a = 83.0 +- 0.7 mas (both
+# solutions); the physical value used here and quoted in our paper,
+# a = 687 +- 6 AU, is its conversion with R0 = 8275.9 pc (GRAVITY Collaboration
+# 2024), rounded to 1 AU. The orbit admits a second, mirrored-orientation
+# solution with a slightly different eccentricity; the "primary" solution is
+# used in the headline numbers.
 # Columns: solution, a_AU, a_err_AU, e, e_err
 solution,a_AU,a_err_AU,e,e_err
 primary,687.0,6.0,0.9832,0.0010

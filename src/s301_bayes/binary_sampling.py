@@ -25,6 +25,7 @@ m_b in [1.1, 7] Msun.
 import numpy as np
 
 from . import constants as c
+from ._numerics import trapezoid
 
 _GL_NODES, _GL_WEIGHTS = np.polynomial.legendre.leggauss(64)
 
@@ -106,7 +107,7 @@ def p_mb_norm() -> float:
     """Normalization integral of p_mb_unnorm over [MB_MIN, MB_MAX]."""
     if "norm" not in _NORM_CACHE:
         grid = np.linspace(c.MB_MIN, c.MB_MAX, 4001)
-        _NORM_CACHE["norm"] = float(np.trapz(p_mb_unnorm(grid), grid))
+        _NORM_CACHE["norm"] = float(trapezoid(p_mb_unnorm(grid), grid))
     return _NORM_CACHE["norm"]
 
 
@@ -123,7 +124,7 @@ def p_me_given_mb(me_grid, mb):
         np.where(me >= mb, imf(me) * q_pdf(mb / np.maximum(me, mb)) / me, 0.0)
         + np.where(me <= mb, imf(mb) * q_pdf(me / mb) / mb, 0.0)
     )
-    norm = np.trapz(dens, me)
+    norm = trapezoid(dens, me)
     return dens / norm
 
 

@@ -14,6 +14,7 @@ with x = 1 - e, the Jacobian is p_j(j) = p_x(x) * j / (1 - x).
 import numpy as np
 
 from . import constants as c
+from ._numerics import trapezoid
 from .binary_sampling import p_me_given_mb
 
 _ME_GRID = np.linspace(*c.M_EJ_RANGE, 241)
@@ -39,7 +40,7 @@ def p_j0(j, a_au):
     e = np.sqrt(np.clip(1.0 - j**2, 0.0, 1.0))
     x = 1.0 - e  # = 1 - e0
     # p_x(x) = int dm_e p(m_e|m_b) LN(x / c(m_e)) / c(m_e)
-    px = np.trapz(
+    px = trapezoid(
         weights[None, :] * _lognorm_pdf(x[..., None] / cbrt) / cbrt,
         _ME_GRID,
         axis=-1,

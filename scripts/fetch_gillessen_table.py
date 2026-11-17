@@ -11,10 +11,9 @@ import sys
 import urllib.request
 from pathlib import Path
 
-URL = (
-    "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
-    "?-source=J/ApJ/837/30/table3&-out=Star,a,e_a,e,e_e&-out.max=100"
-)
+QUERY = "/viz-bin/asu-tsv?-source=J/ApJ/837/30/table3&-out=Star,a,e_a,e,e_e&-out.max=100"
+# VizieR at CDS (Strasbourg), then its CfA mirror
+HOSTS = ("https://vizier.cds.unistra.fr", "https://vizier.cfa.harvard.edu")
 OUT = Path(__file__).resolve().parents[1] / "data" / "gillessen2017_table3.csv"
 
 HEADER = """\
@@ -31,8 +30,16 @@ star,a_arcsec,a_err_arcsec,e,e_err
 
 
 def main():
-    with urllib.request.urlopen(URL) as r:
-        text = r.read().decode()
+    text = None
+    for host in HOSTS:
+        try:
+            with urllib.request.urlopen(host + QUERY, timeout=60) as r:
+                text = r.read().decode()
+            break
+        except OSError as err:
+            print(f"{host}: {err}", file=sys.stderr)
+    if text is None:
+        sys.exit("could not reach VizieR")
     rows = []
     past_header = False
     for line in text.splitlines():

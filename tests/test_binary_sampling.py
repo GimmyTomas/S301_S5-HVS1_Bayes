@@ -5,6 +5,7 @@ prior weight 1/2, with the Gaussian mass likelihood as the only asymmetry)."""
 
 import numpy as np
 
+from s301_bayes._numerics import trapezoid
 from s301_bayes import constants as c
 from s301_bayes.binary_sampling import (
     imf,
@@ -18,7 +19,7 @@ from s301_bayes.binary_sampling import (
 
 def test_p_mb_normalized():
     grid = np.linspace(c.MB_MIN, c.MB_MAX, 4001)
-    assert abs(np.trapz(p_mb(grid), grid) - 1.0) < 1e-6
+    assert abs(trapezoid(p_mb(grid), grid) - 1.0) < 1e-6
 
 
 def test_quadrature_matches_bruteforce_mc():
@@ -33,7 +34,7 @@ def test_quadrature_matches_bruteforce_mc():
     pdf_fine = p_mb(fine)
     expected = np.array(
         [
-            np.trapz(pdf_fine[(fine >= lo) & (fine <= hi)], fine[(fine >= lo) & (fine <= hi)])
+            trapezoid(pdf_fine[(fine >= lo) & (fine <= hi)], fine[(fine >= lo) & (fine <= hi)])
             for lo, hi in zip(edges[:-1], edges[1:])
         ]
     ) * n
@@ -81,20 +82,20 @@ def test_pair_density_symmetry():
     me = np.linspace(*c.M_EJ_RANGE, 601)
     cond = p_me_given_mb(me, 2.3)
     raw = np.array([joint(2.3, m) for m in me])
-    raw /= np.trapz(raw, me)
+    raw /= trapezoid(raw, me)
     assert np.max(np.abs(cond - raw)) < 1e-10
 
 
 def test_q_pdf_normalized_and_twin_excess():
     q = np.linspace(c.Q_MIN, 1.0, 200_001)
-    # trapz across the twin-box discontinuity limits the accuracy to ~jump*h/2
-    assert abs(np.trapz(q_pdf(q), q) - 1.0) < 1e-5
+    # the trapezoidal rule across the twin-box discontinuity limits the accuracy to ~jump*h/2
+    assert abs(trapezoid(q_pdf(q), q) - 1.0) < 1e-5
     # mass in [Q_TWIN_MIN, 1] = power-law share + the full twin excess
     pl_exp = 1.0 + c.Q_ALPHA
     pl_share = (1.0 - c.Q_TWIN_MIN**pl_exp) / (1.0 - c.Q_MIN**pl_exp)
     expected = (1.0 - c.F_TWIN) * pl_share + c.F_TWIN
     sel = q >= c.Q_TWIN_MIN
-    assert abs(np.trapz(q_pdf(q)[sel], q[sel]) - expected) < 1e-4
+    assert abs(trapezoid(q_pdf(q)[sel], q[sel]) - expected) < 1e-4
 
 
 def test_imf_slope():

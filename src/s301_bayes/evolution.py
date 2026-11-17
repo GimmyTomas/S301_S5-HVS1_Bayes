@@ -26,6 +26,7 @@ from scipy.sparse import diags
 from scipy.sparse.linalg import splu
 
 from . import constants as c
+from ._numerics import trapezoid
 from .initial_conditions import p_j0
 
 
@@ -119,7 +120,7 @@ def evolve_star(a_au, gamma, n_j=2401, n_t=1200):
     p0 = p_j0(j, a_au)  # normalized over [0, 1]; mass below jlc absorbed at birth
     p0[0] = 0.0
     pf = np.maximum(fp_solve(j, p0, d_jj(a_au, gamma), c.T_FLIGHT, n_t), 0.0)
-    p_surv = float(np.trapz(pf, j))
+    p_surv = float(trapezoid(pf, j))
 
     def p_e(e):
         e = np.asarray(e, dtype=float)

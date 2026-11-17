@@ -4,6 +4,7 @@ comparison is scripts/mc_crosscheck.py)."""
 
 import numpy as np
 
+from s301_bayes._numerics import trapezoid
 from s301_bayes import constants as c
 from s301_bayes.catalog import load_s301
 from s301_bayes.evolution import d_jj, evolve_mc, evolve_star, j_loss_cone
@@ -13,7 +14,7 @@ from s301_bayes.initial_conditions import p_j0, sample_j0
 def test_initial_conditions_normalized_and_consistent():
     j = np.linspace(1e-4, 1.0, 20001)
     pj = p_j0(j, c.A_301)
-    assert abs(np.trapz(pj, j) - 1.0) < 1e-4
+    assert abs(trapezoid(pj, j) - 1.0) < 1e-4
     rng = np.random.default_rng(5)
     js = sample_j0(500_000, c.A_301, rng)
     cdf = np.cumsum(pj)
@@ -66,6 +67,6 @@ def test_survival_decreases_with_larger_absorbing_radius():
 
     p0[0] = 0.0
     pf1 = fp_solve(j, p0, d_jj(c.A_301, 1.1), c.T_FLIGHT, 1200)
-    surv_1au = np.trapz(np.maximum(pf1, 0.0), j)
+    surv_1au = trapezoid(np.maximum(pf1, 0.0), j)
     surv_3au = evolve_star(c.A_301, 1.1)["p_surv"]
     assert surv_3au < surv_1au - 0.02

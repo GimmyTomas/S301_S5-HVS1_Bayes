@@ -1,0 +1,135 @@
+# Mean dwarf (main-sequence) masses and absolute Ks magnitudes, by spectral type.
+# Source: E. Mamajek, "A Modern Mean Dwarf Stellar Color and Effective
+# Temperature Sequence", file EEM_dwarf_UBVIJHK_colors_Teff.txt,
+# Version 2022.04.16,
+# https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt
+# (retrieved 2026-11-15; sha256 of the retrieved file:
+# 1de2edeec17bb3346e0e4e70b999de5ee29947df38474e64cddb7cfacc164b7f).
+# Cite as Pecaut & Mamajek 2013, ApJS 208, 9, and the table version above.
+# Only the columns SpT, Msun and M_Ks are kept, for all 118 rows of the main
+# table, in the original order and with the original digits; an empty cell
+# marks a value missing from the table ('...'). 80 rows have both Msun and M_Ks;
+# those are the ones used by s301_bayes.mass (M_Ks interpolated linearly in
+# log10 Msun, rows sorted by mass; the displayed photometric masses use the
+# inverse, log10 Msun linear in M_Ks). M_Ks is the absolute magnitude in the
+# 2MASS Ks band.
+# Columns: SpT, Msun [Msun], M_Ks [mag]
+SpT,Msun,M_Ks
+O3V,59,
+O4V,48,
+O5V,43,
+O5.5V,38,
+O6V,35,
+O6.5V,31,
+O7V,28,
+O7.5V,26,
+O8V,23.6,
+O8.5V,21.9,
+O9V,20.2,-3.20
+O9.5V,18.7,-3.073
+B0V,17.7,-2.942
+B0.5V,14.8,-2.587
+B1V,11.8,-2.126
+B1.5V,9.9,-1.848
+B2V,7.3,-1.198
+B2.5V,6.1,-0.956
+B3V,5.4,-0.708
+B4V,5.1,-0.553
+B5V,4.7,-0.376
+B6V,4.3,-0.192
+B7V,3.92,-0.075
+B8V,3.38,0.254
+B9V,2.75,0.621
+B9.5V,2.68,0.648
+A0V,2.18,0.949
+A1V,2.05,1.07
+A2V,1.98,1.172
+A3V,1.86,1.447
+A4V,1.93,1.587
+A5V,1.88,1.607
+A6V,1.83,1.655
+A7V,1.77,1.702
+A8V,1.81,1.694
+A9V,1.75,1.756
+F0V,1.61,1.836
+F1V,1.50,1.941
+F2V,1.46,2.045
+F3V,1.44,2.116
+F4V,1.38,2.188
+F5V,1.33,2.291
+F6V,1.25,2.50
+F7V,1.21,2.579
+F8V,1.18,2.76
+F9V,1.13,2.915
+F9.5V,1.08,2.947
+G0V,1.06,3.043
+G1V,1.03,3.120
+G2V,1.00,3.236
+G3V,0.99,3.282
+G4V,0.985,3.319
+G5V,0.98,3.345
+G6V,0.97,3.409
+G7V,0.95,3.495
+G8V,0.94,3.532
+G9V,0.90,3.693
+K0V,0.88,3.827
+K1V,0.86,3.889
+K2V,0.82,3.938
+K3V,0.78,4.100
+K4V,0.73,4.247
+K5V,0.70,4.397
+K6V,0.69,4.56
+K7V,0.64,4.81
+K8V,0.62,4.95
+K9V,0.59,5.01
+M0V,0.57,5.15
+M0.5V,0.54,5.36
+M1V,0.50,5.64
+M1.5V,0.47,5.75
+M2V,0.44,5.98
+M2.5V,0.40,6.18
+M3V,0.37,6.55
+M3.5V,0.27,7.10
+M4V,0.23,7.36
+M4.5V,0.184,7.93
+M5V,0.162,8.20
+M5.5V,0.123,8.80
+M6V,0.102,9.22
+M6.5V,0.093,9.50
+M7V,0.090,9.70
+M7.5V,0.088,9.81
+M8V,0.085,9.92
+M8.5V,0.080,10.30
+M9V,0.079,10.40
+M9.5V,0.078,10.50
+L0V,0.077,10.55
+L1V,0.076,10.77
+L2V,0.075,11.00
+L3V,,11.40
+L4V,,11.50
+L5V,,11.87
+L6V,,12.20
+L7V,,12.55
+L8V,,12.74
+L9V,,12.93
+T0V,,13.12
+T1V,,13.29
+T2V,,13.45
+T3V,,13.52
+T4V,,14.20
+T4.5V,,14.55
+T5V,,14.9
+T5.5V,,15.1
+T6V,,15.3
+T7V,,15.8
+T7.5V,,16.5
+T8V,,16.9
+T8.5V,,18.3
+T9V,,18.6
+T9.5V,,20.5
+Y0V,,21.0
+Y0.5V,,21.6
+Y1V,,22.2
+Y1.5V,,22.9
+Y2V,,23.5
+Y4V,,

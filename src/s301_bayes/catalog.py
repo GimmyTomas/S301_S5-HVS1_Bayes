@@ -34,10 +34,11 @@ def data_dir() -> Path:
     return Path(__file__).resolve().parents[2] / "data"
 
 
-def _read_csv(path: Path) -> list[dict]:
+def read_csv(path: str | Path) -> list[dict]:
+    """Rows of a data CSV as dicts keyed by the header; lines starting with
+    '#' are comments."""
     with open(path, newline="") as f:
-        rows = [r for r in csv.DictReader(l for l in f if not l.startswith("#"))]
-    return rows
+        return list(csv.DictReader(line for line in f if not line.startswith("#")))
 
 
 def load_all_stars() -> list[Star]:
@@ -53,11 +54,11 @@ def load_all_stars() -> list[Star]:
             e_err=float(r["e_err"]),
             source="GRAVITY+2024",
         )
-        for r in _read_csv(d / "gravity2024_tableB1.csv")
+        for r in read_csv(d / "gravity2024_tableB1.csv")
     }
 
     stars = []
-    for r in _read_csv(d / "gillessen2017_table3.csv"):
+    for r in read_csv(d / "gillessen2017_table3.csv"):
         if float(r["e"]) >= 1.0 or float(r["a_arcsec"]) <= 0.0:
             continue  # S111 is formally unbound
         if r["star"] in gravity:
@@ -77,7 +78,7 @@ def load_all_stars() -> list[Star]:
 
 
 def load_s301(solution: str = "primary") -> Star:
-    for r in _read_csv(data_dir() / "s301.csv"):
+    for r in read_csv(data_dir() / "s301.csv"):
         if r["solution"] == solution:
             return Star(
                 name="S301",

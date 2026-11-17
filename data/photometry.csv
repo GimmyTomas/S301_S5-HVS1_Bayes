@@ -1,0 +1,54 @@
+# K-band magnitudes and spectral classes of the bound S-stars with orbits, plus S301.
+# Source (all stars but S301): Gillessen et al. 2017, ApJ 837, 30 (arXiv:1611.09144),
+# Table 3, columns m_K and Sp ('e' early-type, 'l' late-type), transcribed
+# from the arXiv LaTeX source of that paper. Table 2 of the same paper lists
+# m_K values that differ from Table 3 by up to 0.7 mag (S17) for the 17 stars of
+# the analysis catalog other than S301, and by up to 2.4 mag (S145) for the
+# remaining stars; Table 3 is used throughout.
+# S301: m_K = 19.3 +- 0.3, GRAVITY Collaboration (Abd El Dayem et al.) 2026,
+# arXiv:2607.12664 (no spectroscopic classification: undetected in ERIS
+# spectroscopy; from its m_K the paper infers a late-A/early-F main-sequence star).
+# sptype: e = early-type, l = late-type, - = not classified.
+# The unbound S111 is omitted. Magnitudes are observed (not dereddened).
+# Columns: star, mK [mag], sptype, source
+star,mK,sptype,source
+S1,14.7,e,Gillessen+2017 Table 3
+S2,13.95,e,Gillessen+2017 Table 3
+S4,14.4,e,Gillessen+2017 Table 3
+S6,15.4,e,Gillessen+2017 Table 3
+S8,14.5,e,Gillessen+2017 Table 3
+S9,15.1,e,Gillessen+2017 Table 3
+S12,15.5,e,Gillessen+2017 Table 3
+S13,15.8,e,Gillessen+2017 Table 3
+S14,15.7,e,Gillessen+2017 Table 3
+S17,15.3,l,Gillessen+2017 Table 3
+S18,16.7,e,Gillessen+2017 Table 3
+S19,16,e,Gillessen+2017 Table 3
+S21,16.9,l,Gillessen+2017 Table 3
+S22,16.6,e,Gillessen+2017 Table 3
+S23,17.8,e,Gillessen+2017 Table 3
+S24,15.6,l,Gillessen+2017 Table 3
+S29,16.7,e,Gillessen+2017 Table 3
+S31,15.7,e,Gillessen+2017 Table 3
+S33,16,e,Gillessen+2017 Table 3
+S38,17,l,Gillessen+2017 Table 3
+S39,16.8,-,Gillessen+2017 Table 3
+S42,17.5,e,Gillessen+2017 Table 3
+S54,17.5,e,Gillessen+2017 Table 3
+S55,17.5,-,Gillessen+2017 Table 3
+S60,16.3,e,Gillessen+2017 Table 3
+S66,14.8,e,Gillessen+2017 Table 3
+S67,12.1,e,Gillessen+2017 Table 3
+S71,16.1,e,Gillessen+2017 Table 3
+S83,13.6,e,Gillessen+2017 Table 3
+S85,15.6,l,Gillessen+2017 Table 3
+S87,13.6,e,Gillessen+2017 Table 3
+S89,15.3,l,Gillessen+2017 Table 3
+S91,12.2,e,Gillessen+2017 Table 3
+S96,10,e,Gillessen+2017 Table 3
+S97,10.3,e,Gillessen+2017 Table 3
+S145,17.5,l,Gillessen+2017 Table 3
+S175,17.5,e,Gillessen+2017 Table 3
+R34,14,e,Gillessen+2017 Table 3
+R44,14,e,Gillessen+2017 Table 3
+S301,19.3,-,GRAVITY+2026

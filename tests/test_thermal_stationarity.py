@@ -4,6 +4,7 @@ stationary under constant-D diffusion. These tests guard against dropping it
 
 import numpy as np
 
+from s301_bayes._numerics import trapezoid
 from s301_bayes.evolution import fp_solve
 
 
@@ -14,7 +15,7 @@ def test_fp_thermal_is_stationary():
     pf = fp_solve(j, p_th.copy(), D=3e-9, t_total=3e7, n_steps=500, bottom="reflecting")
     assert np.max(np.abs(pf - p_th) / p_th) < 1e-9
     # probability is conserved with reflecting boundaries
-    assert abs(np.trapz(pf, j) - np.trapz(p_th, j)) < 1e-10
+    assert abs(trapezoid(pf, j) - trapezoid(p_th, j)) < 1e-10
 
 
 def _reflected_walk(n, t_total, n_steps, D, jlo, rng, drift):
